@@ -1157,6 +1157,16 @@ func TestSubnetOverlapCheck(t *testing.T) {
                 }
 			`,
 		},
+		{
+			desc: "return error when the network is not ovnk",
+			inputNetAttachDefConfigSpec: `
+                {
+                    "name": "test",
+                    "type": "sriov-cni"
+                }
+			`,
+			expectedError: ErrorAttachDefNotOvnManaged,
+		},
 	}
 
 	for _, test := range tests {
