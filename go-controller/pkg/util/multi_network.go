@@ -1114,6 +1114,9 @@ func GetAnnotatedNetworkName(netattachdef *nettypes.NetworkAttachmentDefinition)
 func ParseNADInfo(netattachdef *nettypes.NetworkAttachmentDefinition) (NetInfo, error) {
 	netconf, err := ParseNetConf(netattachdef)
 	if err != nil {
+		if errors.Is(err, ErrorAttachDefNotOvnManaged) {
+			return nil, ErrorAttachDefNotOvnManaged
+		}
 		return nil, err
 	}
 
@@ -1129,6 +1132,9 @@ func ParseNADInfo(netattachdef *nettypes.NetworkAttachmentDefinition) (NetInfo, 
 func ParseNetConf(netattachdef *nettypes.NetworkAttachmentDefinition) (*ovncnitypes.NetConf, error) {
 	netconf, err := config.ParseNetConf([]byte(netattachdef.Spec.Config))
 	if err != nil {
+		if errors.Is(err, ErrorAttachDefNotOvnManaged) {
+			return nil, ErrorAttachDefNotOvnManaged
+		}
 		return nil, fmt.Errorf("error parsing Network Attachment Definition %s/%s: %v", netattachdef.Namespace, netattachdef.Name, err)
 	}
 
