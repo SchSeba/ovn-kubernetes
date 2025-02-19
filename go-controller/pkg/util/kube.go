@@ -733,7 +733,7 @@ func EventRecorder(kubeClient kubernetes.Interface) record.EventRecorder {
 		})
 	recorder := eventBroadcaster.NewRecorder(
 		scheme.Scheme,
-		kapi.EventSource{Component: "controlplane"})
+		kapi.EventSource{Component: "ovnk-controlplane"})
 	return recorder
 }
 
