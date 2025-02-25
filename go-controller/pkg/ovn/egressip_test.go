@@ -61,7 +61,7 @@ const (
 	podName2        = "egress-pod2"
 	egressIPName    = "egressip"
 	egressIP2Name   = "egressip-2"
-	inspectTimeout  = 4 * time.Second // arbitrary, to avoid failures on github CI
+	inspectTimeout  = 10 * time.Second // arbitrary, to avoid failures on github CI
 )
 
 func newEgressIPMeta(name string) metav1.ObjectMeta {

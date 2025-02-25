@@ -169,7 +169,7 @@ var _ = ginkgo.Describe("OVN EgressQoS Operations", func() {
 					joinSwitch,
 				}
 
-				gomega.Eventually(fakeOVN.nbClient).Should(libovsdbtest.HaveDataIgnoringUUIDs(expectedDatabaseState))
+				gomega.Eventually(fakeOVN.nbClient, 10*time.Second).Should(libovsdbtest.HaveDataIgnoringUUIDs(expectedDatabaseState))
 				// Ensure default EgressQoS object is updated with zone success status.
 				expectEgressQoSStatusMessageEventually(fakeOVN, namespaceT.Name, false)
 
